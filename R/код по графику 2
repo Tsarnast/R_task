@@ -1,0 +1,18 @@
+#пакет с пакетами
+library('tidyverse')
+library('ggplot2')
+library('here')
+library('skimr')
+library('readr')
+
+#данные с числами
+ds_salaries <- read_csv("Zoom/ds_salaries.csv")
+View(ds_salaries)
+
+ds <- subset(ds_salaries, select = c(salary_in_usd, company_size))
+#код о том, где денег больше платят
+ggplot(ds, aes(x=salary_in_usd, y=company_size)) +
+  geom_line() + geom_point () +
+  labs(title = "Графичек", 
+       x = "зарплата в долларах", 
+       y = "размер компании") 
