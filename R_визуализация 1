@@ -1,0 +1,26 @@
+#пакет с пакетами
+library('tidyverse')
+library('ggplot2')
+library('here')
+library('skimr')
+library('readr')
+
+#данные из цифр
+ds_salaries <- read_csv("Zoom/ds_salaries.csv")
+View(ds_salaries)
+
+#новая переменная
+ds <- subset(ds_salaries, select = c(experience_level, salary))
+#палетка цветов
+my_palette <- c("#3AFF18", "#FF183E", "#FF18CB", "#18FFD0")
+#график глазами программиста
+ggplot(ds, aes(x=experience_level, y=salary)) +
+  geom_col(aes(fill = el_categ)) +
+  scale_fill_manual(values = my_palette) +
+  xlab("Уровень специалиста") +
+  ylab("Зарплата в долларах") +
+  labs(title = "Уровень и зп") +
+  labs(fill = "Расшифровка уровня специалиста") +
+  theme(axis.text.x = element_text(angle = 360,vjust = 0.5,
+                                   hjust = 0.3, size=14),
+        plot.title = element_text(hjust = 0.4, size=16, face = "bold"))
